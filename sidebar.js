@@ -16,11 +16,11 @@ function withDropDownParent(data){
   button.id="drop-down-button"
   let buttonElements = ''
   buttonElements = `
-  <div class="flex gap-x-5 px-3 group-hover:text-indigo-500">
+  <div class="flex gap-x-5 px-3 group-hover:text-indigo-500 pointer-events-none	">
                   ${data.icon}
-              <p class="group-hover:text-indigo-500 capitalize">${data.title}</p>
+              <p class="pointer-events-none	 group-hover:text-indigo-500 capitalize">${data.title}</p>
           </div>
-          <svg id="drop-down-icon" class="transition-all h-5 w-5 text-gray-500  group-hover:text-indigo-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="6 9 12 15 18 9" /></svg>
+          <svg id="drop-down-icon" class=" pointer-events-none	 transition-all h-5 w-5 text-gray-500  group-hover:text-indigo-500"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="6 9 12 15 18 9" /></svg>
   `
   button.innerHTML = buttonElements
   return button
@@ -99,9 +99,11 @@ function sidebarToggle(){
 
   })
 
-  $("#drop-down-button").click(function(){
-      $("#drop-down-icon")[0].classList.toggle('rotate-180')
-      $("#dropdown-list")[0].classList.toggle('hidden')
+  document.querySelectorAll("#drop-down-button").forEach(el=>{
+    el.addEventListener("click",function(){
+        el.parentNode.children[0].children[1].classList.toggle('rotate-180')
+        el.parentNode.children[1].classList.toggle('hidden')
+    })
   })
 }
 function init(arr ,containerId){
