@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frieght</title>
+    <!-- <script src="https://cdn.jsdelivr.net/gh/charrlesss/sidebar-cdn/sidebar.js"></script> -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+    
+     <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                clifford: '#da373d',
+              }
+            }
+          }
+        }
+      </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    
+</head>
+<body>
+    <div class="min-h-screen flex">
+        <div id="sidebar" class="py-12 bg-white min-h-screen transition-all ease-in-out  md:relative absolute md:w-[300px] w-[250px] transition-all ">
+          <div class="flex space-2 items-center border-b-2 pb-4 ">
+            <div id="toggle-sidebar-mobile" class="absolute top-5 right-2 md:hidden flex items-center  cursor-pointer">
+                <svg class="h-5 w-5 text-indigo-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                  </svg>
+            </div>
+            <div>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-14 w-14 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="ml-3">
+              <h1 class="text-3xl font-bold text-indigo-600">VENUS</h1>
+              <p class="text-center text-sm text-indigo-600 mt-1 font-serif">DASHBOARD</p>
+            </div>
+          </div>
+          <div id="sidebar-container">
+            <!-- sidebar -->
+          </div>
+        </div>
+        <div class="bg-indigo-50 flex-grow  ">
+            <header  class="flex justify-between py-2 pl-2 pr-10 w-full h-auto  bg-white ">
+                <div id="toggle-sidebar" class="flex items-center  cursor-pointer">
+                    <svg class="h-5 w-5 text-indigo-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                      </svg>
+                </div>
+                <div class="flex gap-x-5 items-center ">
+                    <div class="relative">
+                        <svg class=" cursor-pointer h-5 w-5 text-indigo-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6" />  <path d="M9 17v1a3 3 0 0 0 6 0v-1" /></svg>
+                    </div>
+                    <div  class="relative" >
+                        <img class=" cursor-pointer w-10 h-10 rounded-full" src="data:image/jpeg;base64,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" alt="Rounded avatar">
+                    </div>
+                </div>
+            </header>
+                <div class="w-full h-full border border-red-500">
+    
+                </div>
+        </div>
+      </div>
+
+      <script src="/sidebar.js"></script>
+    <script>
+        
+        const sidebarConfig = [
+            {
+                link:"/",
+                title:"dashboard",
+                icon:`<svg class="h-5 w-5 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                  </svg>`
+            },
+            {
+                title:"security",
+                icon:`<svg class="h-5 w-5 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                  </svg>`,
+                dropdown:[
+                    {
+                        link:"/macdo.html",
+                        title:"macdo",
+                        icon:`<svg class="h-5 w-5 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>`
+                    },
+                    {
+                        link:"/jabi.html",
+                        title:"jabi",
+                        icon:`<svg class="h-5 w-5 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>`
+                    }
+                ]
+                      
+            },
+            {
+                title:"security",
+                icon:`<svg class="h-5 w-5 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                  </svg>`,
+                dropdown:[
+                    {
+                        link:"/inasal.html",
+                        title:"macdo",
+                        icon:`<svg class="h-5 w-5 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>`
+                    },
+                    {
+                        link:"/kfc.html",
+                        title:"jabi",
+                        icon:`<svg class="h-5 w-5 "  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+                        </svg>`
+                    }
+                ]
+                      
+            }
+            
+            
+        ]
+
+        $(function(){
+            init(sidebarConfig,'sidebar-container')
+        })
+
+    </script>
+</body>
+</html>

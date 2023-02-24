@@ -27,25 +27,7 @@ function withDropDownParent(data){
 
 }
 
-function withDropDown(dData ,pathname ,button,dul){
-  if(pathname === dData.link){
-      window.onload = ()=>{
-       let timeout =  setTimeout(function(){
-              document.getElementById("drop-down-button").click()
-              clearTimeout(timeout)
-          },200)
-      }
-
-      return `
-      <li class="hover:bg-gray-100 group ">
-          <a href="${dData.link}"
-          class="${pathname === dData.link ? "bg-gray-100 text-indigo-500" :"text-gray-500"} capitalize flex gap-x-2 group-hover:text-indigo-500 flex items-center w-full p-2 text-sm  font-normal transition duration-75 rounded-lg group  pl-11">
-          ${dData.icon}
-          ${dData.title}</a>
-      </li>
-  `
-
-  }
+function withDropDown(dData ,pathname){
  return `
       <li class="hover:bg-gray-100 group ">
           <a href="${dData.link}"
@@ -55,6 +37,14 @@ function withDropDown(dData ,pathname ,button,dul){
       </li>
   `
 
+}
+function activeNav(container){
+    const pathname  = window.location.pathname
+    container.querySelectorAll('a').forEach((link)=>{
+        if(link.pathname === pathname){
+            link.parentNode.parentNode.parentNode.firstChild.click()
+        }
+    })
 }
 
 function initDisplaySidebar(arr,container){
@@ -74,6 +64,7 @@ function initDisplaySidebar(arr,container){
               dul.innerHTML += withDropDown(dData ,pathname ,button,dul)
               li.append(dul)
               ul.append(li)
+
           })
       }else{
           const li = noDropDown(data,pathname)
@@ -110,4 +101,5 @@ function init(arr ,containerId){
   const container = document.getElementById(containerId)
   initDisplaySidebar(arr,container)
   sidebarToggle()
+  activeNav(container)
 }
